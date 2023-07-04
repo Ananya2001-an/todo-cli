@@ -1,10 +1,12 @@
 {
+  "type": "module",
   "name": "todo-cli",
   "version": "1.0.0",
   "description": "A simple TODO and note-taking cli app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js"
   },
   "repository": {
     "type": "git",
@@ -21,6 +23,9 @@
     "chalk": "^5.3.0",
     "chalk-animation": "^2.0.3",
     "commander": "^11.0.0",
-    "figlet": "^1.6.0"
+    "dotenv": "^16.3.1",
+    "figlet": "^1.6.0",
+    "inquirer": "^9.2.7",
+    "node-storage": "^0.0.9"
   }
 }

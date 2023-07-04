@@ -2,10 +2,9 @@ import { Command } from "commander";
 import inquirer from "inquirer";
 import { supabase } from "../utils/supabaseClient.js";
 import chalk from "chalk";
-import Storage from "node-storage";
 import { exit } from "process";
+import { store } from "../utils/storage.js";
 
-const store = new Storage("./user.json");
 const program = new Command();
 
 export const register = program.command("register")
