@@ -1,0 +1,26 @@
+{
+  "name": "todo-cli",
+  "version": "1.0.0",
+  "description": "A simple TODO and note-taking cli app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ananya2001-an/todo-cli.git"
+  },
+  "author": "Ananya Nayak",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Ananya2001-an/todo-cli/issues"
+  },
+  "homepage": "https://github.com/Ananya2001-an/todo-cli#readme",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.26.0",
+    "chalk": "^5.3.0",
+    "chalk-animation": "^2.0.3",
+    "commander": "^11.0.0",
+    "figlet": "^1.6.0"
+  }
+}
