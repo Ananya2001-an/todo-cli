@@ -140,7 +140,8 @@ export const note_view = program.command("note-view")
                         exit(1)
                     }
                     if (image) {
-                        console.log(await terminalImage.buffer(Buffer.from(await image.arrayBuffer()), {width: "50%", height: "50%", preserveAspectRatio: true}))
+                        const imageBuffer = Buffer.from(await image.arrayBuffer())
+                        console.log(await terminalImage.buffer(imageBuffer, {width: "50%", height: "50%", preserveAspectRatio: true}))
                     }
 
                     const rainbow = chalkAnimation.rainbow(note[0].title);
