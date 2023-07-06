@@ -1,4 +1,4 @@
-## todo-cli
+## todo-cli ✅
 
 It's a simple TODO and note-taking cli app. It's made with nodejs and uses supabase to store data and authenticate users.
 
@@ -38,5 +38,4 @@ node src/index.js help
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
-```
 
