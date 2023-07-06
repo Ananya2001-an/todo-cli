@@ -151,7 +151,7 @@ export const note_view = program.command("note-view")
 
                     setTimeout(() => {
                         rainbow.stop();
-                        console.log(chalk.bold(note[0].note))
+                        console.log(chalk.bold.cyanBright(note[0].note + "\n"))
                     }, 2000);
                 }
             })
