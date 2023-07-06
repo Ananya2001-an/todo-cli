@@ -36,10 +36,10 @@ export const register = program.command("register")
                     }
                 }})
             if (error) {
-                console.log(chalk.redBright(error.message));
+                console.log(chalk.redBright('⛔ ' + error.message));
             }
             else {
-                console.log(chalk.yellowBright("Verify your email to complete registration!"))
+                console.log(chalk.yellowBright("👉 Verify your email to complete registration!"))
             }
         });
     });
@@ -49,7 +49,7 @@ export const login = program.command("login")
     .action(async() => {
         const session = store.get("user")
         if (session) {
-            console.log(chalk.yellowBright("You are already logged in! Logout first..."))
+            console.log(chalk.yellowBright("⚠️" + " " + "You are already logged in! Logout first..."))
             exit(1)
         }
 
@@ -70,11 +70,11 @@ export const login = program.command("login")
                     password: answers.password,
                 })
                 if (error) {
-                    console.log(chalk.redBright(error.message));
+                    console.log(chalk.redBright('⛔ ' + error.message));
                 }
                 else {
                     store.put("user", data.user)
-                    console.log(chalk.greenBright(`Welcome ${data.user.user_metadata.name}!`))
+                    console.log(chalk.greenBright(`✅ Welcome ${data.user.user_metadata.name}!`))
                 }
             });
     });
@@ -83,6 +83,6 @@ export const logout = program.command("logout")
     .description("Logout of your account")
     .action(() => {
         store.remove("user")
-        console.log(chalk.greenBright("Logged out successfully!"))
+        console.log(chalk.greenBright("✅ Logged out successfully!"))
     });
 

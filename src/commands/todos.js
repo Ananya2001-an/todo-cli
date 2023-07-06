@@ -12,7 +12,7 @@ export const todo_add = program.command("todo-add")
     .description("Add a new todo")
     .action(async() => {
         if (!session) {
-            console.log(chalk.yellowBright("You are not logged in! Login first..."))
+            console.log(chalk.yellowBright("⚠️ You are not logged in! Login first..."))
             exit(1)
         }
 
@@ -44,11 +44,11 @@ export const todo_add = program.command("todo-add")
                 }
             ])
             if (error) {
-                console.log(chalk.redBright(error.message));
+                console.log(chalk.redBright('⛔ ' + error.message));
                 exit(1)
             }
             else {
-                console.log(chalk.greenBright("Todo added successfully!"))
+                console.log(chalk.greenBright("✅ Todo added successfully!"))
             }
         });
     });
@@ -57,20 +57,20 @@ export const todo_list = program.command("todo-list")
     .description("List all todos")
     .action(async() => {
         if (!session) {
-            console.log(chalk.yellowBright("You are not logged in! Login first..."))
+            console.log(chalk.yellowBright("⚠️ You are not logged in! Login first..."))
             exit(1)
         }
 
         const {data, error} = await supabase.from("todos").select("*").eq("author", session.id)
         if (error) {
-            console.log(chalk.redBright(error.message));
+            console.log(chalk.redBright('⛔ ' + error.message));
             exit(1)
         }
         else {
-            console.log(chalk.greenBright("Your todos:"))
+            console.log(chalk.greenBright("✅ Your todos:"))
             const rows = []
             data.forEach(todo => {
-                rows.push({Title: todo.title, Priority: todo.priority, Due_date: todo.due_date, Status: todo.status === 'todo' ? ' ✅ ' : todo.status === 'in-progress'? ' 🚧 ' : ' ❌ '})
+                rows.push({Title: todo.title, Priority: todo.priority, Due_date: todo.due_date, Status: todo.status === 'todo' ? ' TODO ❌ ' : todo.status === 'in-progress'? ' WIP 🚧 ' : ' DONE ✅ '})
             })
             console.table(rows)
         }
@@ -80,13 +80,13 @@ export const todo_update = program.command("todo-update")
     .description("Update a todo")
     .action(async() => {
         if (!session) {
-            console.log(chalk.yellowBright("You are not logged in! Login first..."))
+            console.log(chalk.yellowBright("⚠️ You are not logged in! Login first..."))
             exit(1)
         }
 
         const {data, error} = await supabase.from("todos").select("*").eq("author", session.id)
         if (error) {
-            console.log(chalk.redBright(error.message));
+            console.log(chalk.redBright('⛔ ' + error.message));
             exit(1)
         }
         else {
@@ -110,11 +110,49 @@ export const todo_update = program.command("todo-update")
             ]).then(async(answers) => {
                 const {error} = await supabase.from("todos").update({status: answers.status}).eq("id", answers.todo)
                 if (error) {
-                    console.log(chalk.redBright(error.message));
+                    console.log(chalk.redBright('⛔ ' + error.message));
                     exit(1)
                 }
                 else {
-                    console.log(chalk.greenBright("Todo updated successfully!"))
+                    console.log(chalk.greenBright("✅ Todo updated successfully!"))
+                }
+            });
+        }
+    });
+
+export const todo_delete = program.command("todo-delete")
+    .description("Delete a todo")
+    .action(async() => {
+        if (!session) {
+            console.log(chalk.yellowBright("⚠️ You are not logged in! Login first..."))
+            exit(1)
+        }
+
+        const {data, error} = await supabase.from("todos").select("*").eq("author", session.id)
+        if (error) {
+            console.log(chalk.redBright('⛔ ' + error.message));
+            exit(1)
+        }
+        else {
+            const todos = []
+            data.forEach(todo => {
+                todos.push({name: todo.title, value: todo.id})
+            })
+            inquirer.prompt([
+                {
+                    type: "list",
+                    name: "todo",
+                    message: "Select a todo: ",
+                    choices: todos,
+                },
+            ]).then(async(answers) => {
+                const {error} = await supabase.from("todos").delete().eq("id", answers.todo)
+                if (error) {
+                    console.log(chalk.redBright('⛔ ' + error.message));
+                    exit(1)
+                }
+                else {
+                    console.log(chalk.greenBright("✅ Todo deleted successfully!"))
                 }
             });
         }

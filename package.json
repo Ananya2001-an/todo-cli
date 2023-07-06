@@ -26,6 +26,7 @@
     "dotenv": "^16.3.1",
     "figlet": "^1.6.0",
     "inquirer": "^9.2.7",
-    "node-storage": "^0.0.9"
+    "node-storage": "^0.0.9",
+    "terminal-image": "^2.0.0"
   }
 }
